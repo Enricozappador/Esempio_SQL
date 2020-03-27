@@ -30,6 +30,7 @@ public class LeggiBabs {
 			conn.close(); 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		} 
 		
 	}
