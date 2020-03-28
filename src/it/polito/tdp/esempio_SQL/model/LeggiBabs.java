@@ -16,14 +16,12 @@ public class LeggiBabs {
 		try {
 			Connection conn = DriverManager.getConnection(jdbcURL);
 			
-			String sql = "SELECT NAME FROM station WHERE landmark = ?" ;
+			String sql = "SELECT name FROM station WHERE landmark = ? " ;
 			
 			PreparedStatement st = conn.prepareStatement(sql) ;
 			
-			st.setString(1, "Palo Alto"); 
-			 
-			
-			ResultSet res = st.executeQuery(sql); 
+			st.setString(1, "Palo Alto");
+			ResultSet res = st.executeQuery(); 
 			
 			while (res.next()) {
 				String nomeStazione = res.getString("name"); 
