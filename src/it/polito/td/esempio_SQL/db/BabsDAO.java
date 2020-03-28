@@ -17,14 +17,48 @@ public class BabsDAO {
 		List<Station> result = new ArrayList<>();
 		
 		String sql = "SELECT station_id, name, dockcount, landmark FROM station ORDER BY name" ; 
-String jdbcURL = "jdbc:mysql://localhost/babs?user=root&password=Enrico17";
 		
 		try {
-			Connection conn = DriverManager.getConnection(jdbcURL);
+			Connection conn = DBConnect.getConnection();
 			
 			PreparedStatement st = conn.prepareStatement(sql) ;
 			
 			//st.setString(1, "Palo Alto");
+			ResultSet res = st.executeQuery(); 
+			
+			while (res.next()) {
+				Station s = new Station(res.getInt("station_id"), res.getString("name"),
+						res.getInt("dockcount"), res.getString("landmark"));
+				result.add(s);
+			}
+			
+			st.close();
+			
+			conn.close(); 
+			
+			return result; 
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} 
+		
+		return null; 
+		
+	}
+	
+	public List<Station> listStationbylandmark(String landmark){
+	List<Station> result = new ArrayList<>();
+		
+		String sql = "SELECT station_id, name, dockcount, landmark FROM station WHERE landmark =? ORDER BY name" ; 
+		
+		try {
+			Connection conn = DBConnect.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement(sql) ;
+			
+			st.setString(1, landmark);
 			ResultSet res = st.executeQuery(); 
 			
 			while (res.next()) {

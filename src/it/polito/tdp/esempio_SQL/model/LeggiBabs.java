@@ -15,6 +15,11 @@ public class LeggiBabs {
 		for(Station s : tutte) {
 			System.out.println(s.getName());
 		}
+		System.out.println("--------"); 
+		List<Station> paloAlto = dao.listStationbylandmark("Palo Alto"); 
+		for(Station s : paloAlto) {
+			System.out.println(s.getName());
+		}
 	}
 	
 	public static void main (String args[]) {
