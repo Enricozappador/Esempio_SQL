@@ -2,6 +2,7 @@ package it.polito.tdp.esempio_SQL.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,9 +16,12 @@ public class LeggiBabs {
 		try {
 			Connection conn = DriverManager.getConnection(jdbcURL);
 			
-			Statement st = conn.createStatement() ;
+			String sql = "SELECT NAME FROM station WHERE landmark = ?" ;
 			
-			String sql = "SELECT NAME FROM station " ; 
+			PreparedStatement st = conn.prepareStatement(sql) ;
+			
+			st.setString(1, "Palo Alto"); 
+			 
 			
 			ResultSet res = st.executeQuery(sql); 
 			
